@@ -1,5 +1,5 @@
 
-//TODO Iddée faire clignoter la led intérieur quand un capteur n'est pas branché
+//TODO Idée faire clignoter la led intérieur quand un capteur n'est pas branché
 
 void setup() {
   Serial.begin(9600);
@@ -17,5 +17,4 @@ void loop() {
   Serial.println("----");
   delay(5000);
   //connectGoogle();
-  Serial.println("----");
 }
