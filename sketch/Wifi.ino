@@ -13,7 +13,7 @@ void loginWifi() {
 
   Serial.print("Waiting for WiFi... ");
 
-  while(WiFiMulti.run() != WL_CONNECTED) {
+  while(WiFi.status() != WL_CONNECTED) {
       Serial.print(".");
       delay(500);
   }
@@ -23,6 +23,6 @@ void loginWifi() {
 }
 
 
-void isWifiConnected() {
-  return Wifi.status() == WL_CONNECTED;
+bool isWifiConnected() {
+  return WiFi.status() == WL_CONNECTED;
 }

@@ -17,7 +17,7 @@ void initializeLightSensor() {
 }
 
 
-void getLight() {
+LightMesure getLight() {
   if (tmg3993.getSTATUS() & STATUS_AVALID && tmg3993.getDeviceID() != 15) {
         uint16_t r, g, b, c;
         int32_t lux, cct;
@@ -43,10 +43,14 @@ void getLight() {
         
         // don't forget to clear the interrupt bits
         tmg3993.clearALSInterrupts();
+
+         LightMesure mesure(r, g, b, c ,cct, lux);
+         return mesure;
     }
     else {
       Serial.println("Erreur capteur lumière non reconnu");
       initializeLightSensor();
-      //Necessité d'intialiser le connecteur
+      LightMesure error(0.00, 0.00, 0.00, 0.00 ,0.00, 0.00);
+      return error;
     }
 }

@@ -13,10 +13,12 @@ void initializeBluetooth() {
   SerialBT.begin("ESP32Tamagochi"); //Bluetooth device name
 }
 
-void writeData(data) {
+void writeData(float data) {
   if(SerialBT.hasClient()) {
     Serial.println("Impossible d'envoyer des data pas de client connecté");
     return;  
   }
-  SerialBT.write();
+  //SerialBT.write(data);
 }
+
+//TODO Faire une tâche d'interruption pour dire qu'on est connecter en bluetooth

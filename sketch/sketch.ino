@@ -1,3 +1,5 @@
+#include <LightMesure.h>
+#include <HumidityTemperatureMesure.h>
 
 //TODO Idée faire clignoter la led intérieur quand un capteur n'est pas branché
 
@@ -6,7 +8,7 @@ void setup() {
   intializeDHTSensor();
   initializeLightSensor();  
   loginWifi();
-  
+  millis();
 }
 
 
