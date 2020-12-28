@@ -18,3 +18,11 @@ float HumidityTemperatureMesure::getHumidity(void){
 unsigned long HumidityTemperatureMesure::getElapsedTime(void){
     return elapsedTime;
 }
+
+JsonObject HumidityTemperatureMesure::toJson(void){
+    //256 Calculate with https://arduinojson.org/v5/assistant/
+    DynamicJsonDocument doc(256);
+    String input = "{\"humidity\": "+String(humidity)+",\"temperature\":"+String(temperature)+",\"heatIndex\":"+String(heatIndex)+",\"time\":"+String(elapsedTime)+"}";
+    deserializeJson(doc, input);
+    return doc.as<JsonObject>();
+}

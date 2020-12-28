@@ -12,6 +12,16 @@ L’objectif de notre projet est de développer un environnement virtuel évolua
 
 ## Librairies nécessaires
 
+### A Télecharger
+
 - DHT sensor library
 - Adafruit Unifed Sensor
 - [Seeed_TMG3993](https://github.com/Seeed-Studio/Seeed_TMG3993) a importer en ZIP
+- ArduinoJSON
+
+### A importer
+
+Via le menu Croquis > Inclure une bibliothèque > Ajouter la bibliothèque ZIP
+
+- LightMesure
+- HumidityTemperatureMesure

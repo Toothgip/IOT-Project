@@ -4,11 +4,11 @@
 
 //TODO Quand on envoit des données mettre a jour le elapsed time  en faisant current - NewTime
 const uint16_t httpPort = 80;
-char* methodHttp = "POST";
+String methodHttp = "POST";
 const char* httpVersion = "HTTP/1.1";
 WiFiClient client;
 
-bool initHttpRequest(char* host) {
+bool initHttpRequest(char host[]) {
   
   if (!client.connect(host, httpPort)) {
       Serial.println("connection failed");
@@ -17,7 +17,7 @@ bool initHttpRequest(char* host) {
   return true;
 }
 
-void post(char* host, String path, String data) {
+void post(char host[], String path, DynamicJsonDocument data) {
   //Faire une fonction génerique de Headers HTTP
 
   if(!isWifiConnected()) {
@@ -29,11 +29,28 @@ void post(char* host, String path, String data) {
   }
   //Header
   methodHttp = "POST";
+  String dataStr = "";
+  serializeJson(data, dataStr);
+  
   client.println(methodHttp+ ' '+path+ ' '+httpVersion);
   client.println("Host: " + String(host));
-  client.println("Connection: close");
-  client.println(); // end HTTP header
-
+  client.println("Content-Type: application/json");
+  
+  client.print("Content-Length: ");
+  client.println(dataStr.length()+1);
+  client.println();
+  
   // send HTTP body
-  //client.println(queryString);
+  client.println(dataStr);
+
+  readResponse();
+}
+
+void readResponse() {
+    while(client.connected()) {
+      delay(10);
+      String line = client.readStringUntil('\r');
+      Serial.print(line);
+       
+    }
 }

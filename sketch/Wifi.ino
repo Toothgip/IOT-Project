@@ -12,14 +12,18 @@ void loginWifi() {
   WiFi.begin(SSID, pwd);
 
   Serial.print("Waiting for WiFi... ");
-
+  unsigned long timeout = millis();
   while(WiFi.status() != WL_CONNECTED) {
-      Serial.print(".");
-      delay(500);
+    Serial.print(".");
+    delay(300);
+    if (millis() - timeout > 2000) {
+      WiFi.begin(SSID, pwd);
+    }
   }
   Serial.println("WiFi connected");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
+  delay(500);
 }
 
 

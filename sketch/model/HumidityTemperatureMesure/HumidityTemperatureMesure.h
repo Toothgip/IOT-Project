@@ -2,6 +2,7 @@
 #define HumidityTemperatureMesure_h
 
 #include <Arduino.h>
+#include <ArduinoJson.h>
 
 class HumidityTemperatureMesure {
   public:
@@ -10,6 +11,7 @@ class HumidityTemperatureMesure {
     float getHeatIndex(void);
     float getHumidity(void);
     unsigned long getElapsedTime(void);
+    JsonObject toJson(void);
   private:
     float humidity;
     float temperature;

@@ -2,6 +2,7 @@
 #define LightMesure_h
 
 #include <Arduino.h>
+#include <ArduinoJson.h>
 
 class LightMesure {
   public:
@@ -13,6 +14,7 @@ class LightMesure {
     float getCCT(void);
     float getLux(void);
     unsigned long getElapsedTime(void);
+    JsonObject toJson(void);
 
   private:
     String rgb;
