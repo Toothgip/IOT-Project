@@ -33,6 +33,6 @@ HumidityTemperatureMesure getHumidityAndTemperature() {
   Serial.print(hic);
   Serial.println(F("°C "));
 
-  HumidityTemperatureMesure mesure(t, h, hic);
+  HumidityTemperatureMesure mesure(h, t, hic);
   return mesure;
 }
