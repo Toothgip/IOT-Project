@@ -2,7 +2,8 @@
 //
 #include <WiFiClient.h>
 
-//TODO Quand on envoit des données mettre a jour le elapsed time  en faisant current - NewTime
+//En local
+//const uint16_t httpPort = 4000;
 const uint16_t httpPort = 80;
 String methodHttp = "POST";
 const char* httpVersion = "HTTP/1.1";

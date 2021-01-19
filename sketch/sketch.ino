@@ -27,6 +27,7 @@ void sendData(HumidityTemperatureMesure htm, LightMesure lm) {
   DynamicJsonDocument jsonBuffer(512);
   jsonBuffer["lightMesure"] = lm.toJson();
   jsonBuffer["humidityTemperatureMesure"] = htm.toJson();
-  //post("localhost:8080", "mesure", root);
-  post("httpbin.org", "/post", jsonBuffer);
+
+  post("aqueous-oasis-80188.herokuapp.com", "/api/data", jsonBuffer);
+  //post("192.168.43.125", "/api/data", jsonBuffer);
 }
