@@ -20,11 +20,10 @@ bool initHttpRequest(char host[]) {
 
 void post(char host[], String path, DynamicJsonDocument data) {
   //Faire une fonction génerique de Headers HTTP
-  Serial.println("Test 1");
+
   if(!isWifiConnected()) {
     Serial.println("Erreur d'envoi de la requete Wifi non connecté");
   }
-  Serial.println("Test 2");
   if(!initHttpRequest(host)) {
     Serial.print("Erreur impossible de se connecter à l'host: ");
     Serial.println(host);
@@ -35,7 +34,6 @@ void post(char host[], String path, DynamicJsonDocument data) {
   String dataStr = "";
   
   serializeJson(data, dataStr);
-  Serial.println("Test 3");
   client.println(methodHttp+ ' '+path+ ' '+httpVersion);
   client.println("Host: " + String(host));
   client.println("Content-Type: application/json");
@@ -52,21 +50,17 @@ void post(char host[], String path, DynamicJsonDocument data) {
     client.println(0);
     client.println();
   }
-  Serial.println("Test 4");
 
   readResponse();
-  Serial.println("Test 5");
   client.stop();
   delay(500);
 }
 
 void postWithoutParam(char host[], String path) {
     //Faire une fonction génerique de Headers HTTP
-  Serial.println("Test 1");
   if(!isWifiConnected()) {
     Serial.println("Erreur d'envoi de la requete Wifi non connecté");
   }
-  Serial.println("Test 2");
   if(!initHttpRequest(host)) {
     Serial.print("Erreur impossible de se connecter à l'host: ");
     Serial.println(host);
@@ -85,10 +79,8 @@ void postWithoutParam(char host[], String path) {
   client.println(0);
   client.println();
   
-  Serial.println("Test 4");
 
   readResponse();
-  Serial.println("Test 5");
   client.stop();
   delay(500);
 }
