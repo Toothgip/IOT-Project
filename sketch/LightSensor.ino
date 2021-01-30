@@ -17,6 +17,7 @@ void initializeLightSensor() {
 }
 
 
+//Recupere les mesures
 LightMesure getLight() {
   if (tmg3993.getSTATUS() & STATUS_AVALID && tmg3993.getDeviceID() != 15) {
         uint16_t r, g, b, c;

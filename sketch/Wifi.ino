@@ -7,7 +7,7 @@
 /*char* SSID = "OnePlus 6";
 char* pwd = "123456789";*/
 
-//Wifi Appart
+//Wifi Appartement
 char* SSID = "Ninebox";
 char* pwd = "Quentin2Montargis";
 

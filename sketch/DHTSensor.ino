@@ -11,6 +11,7 @@ void intializeDHTSensor() {
   dht.begin();
 }
 
+//Recupere les mesures
 HumidityTemperatureMesure getHumidityAndTemperature() {
   float h = dht.readHumidity();
   float t = dht.readTemperature();
