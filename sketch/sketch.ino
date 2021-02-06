@@ -2,17 +2,21 @@
 #include <HumidityTemperatureMesure.h>
 #include <ArduinoJson.h>
 
+
+//Constant for integreated ked
 const int BUTTON_PIN = 15;     // D5
 const int LED_PIN =  13;      // the number of the LED pin
+
+//Constant for interaction button
 int buttonState = 0;         // variable for reading the pushbutton status
 int food = 0;
 
+//Constant for rgb led
+bool blinking = false;
 
-void setup() {
-  //Initialisation de la led rouge
-  pinMode(LED_PIN, OUTPUT);
+void setup() {  
+  switchOnRGB(255, 0, 0);
   pinMode(BUTTON_PIN, INPUT);
-  digitalWrite(LED_PIN, LOW);
   
   Serial.begin(115200);
   intializeDHTSensor();
@@ -20,8 +24,13 @@ void setup() {
   loginWifi();
   //Interruption quand on clique sur le bouton
   attachInterrupt(digitalPinToInterrupt(BUTTON_PIN), buttonClicked, FALLING);
-  delay(200);
-  digitalWrite(LED_PIN, HIGH);
+  delay(100);
+
+
+  //There was no problem during initialization => Green light
+  if(!blinking) {
+    switchOnRGB(0, 255, 0);
+  }
 }
 
 
@@ -32,8 +41,7 @@ void loop() {
   sendData(htm, lm);
   food = 0;
   Serial.println("\n----");
-  delay(2000);
-  
+  delay(3000);  
 }
 
 //Envoi des données à l'API
@@ -50,6 +58,7 @@ void sendData(HumidityTemperatureMesure htm, LightMesure lm) {
 
 void buttonClicked() {
   buttonState = digitalRead(BUTTON_PIN);
+  switchTemporaryBlinkRGB(255, 255, 0, 1500);
   Serial.println("Button pressed");
   food++;
   

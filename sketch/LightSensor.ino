@@ -11,6 +11,7 @@ void initializeLightSensor() {
   
   if (tmg3993.initialize() == false) {
       Serial.println("Device not found. Check wiring.");
+      switchTemporaryBlinkRGB(255, 255,255, 1500);
   }
   tmg3993.setADCIntegrationTime(0xdb); // the integration time: 103ms
   tmg3993.enableEngines(ENABLE_PON | ENABLE_AEN | ENABLE_AIEN);
@@ -51,7 +52,7 @@ LightMesure getLight() {
     else {
       Serial.println("Erreur capteur lumière non reconnu");
       initializeLightSensor();
-      LightMesure error(0.00, 0.00, 0.00, 0.00 ,0.00, 0.00);
+      LightMesure error(0.00, 0.00, 0.00, 0.00 ,0.00, 0.00);      
       return error;
     }
 }

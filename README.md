@@ -18,6 +18,7 @@ L’objectif de notre projet est de développer un environnement virtuel évolua
 - Adafruit Unifed Sensor
 - [Seeed_TMG3993](https://github.com/Seeed-Studio/Seeed_TMG3993) a importer en ZIP
 - ArduinoJSON
+- Grove ChainableRGB
 
 ### A importer
 

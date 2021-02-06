@@ -21,10 +21,16 @@ void post(char host[], String path, DynamicJsonDocument data) {
 
   if(!isWifiConnected()) {
     Serial.println("Erreur d'envoi de la requete Wifi non connecté");
+    if(!blinking){
+      switchTemporaryBlinkRGB(255, 0,0, 1500);
+    }
+    return;
   }
   if(!initHttpRequest(host)) {
     Serial.print("Erreur impossible de se connecter à l'host: ");
     Serial.println(host);
+    switchTemporaryBlinkRGB(0, 255,0, 1500);
+    
     return;
   }
   //Header
@@ -51,6 +57,9 @@ void post(char host[], String path, DynamicJsonDocument data) {
 void readResponse() {
       delay(10);
       String line = client.readStringUntil('\n');
+      if(line.indexOf("201") == -1){
+        switchTemporaryBlinkRGB(0, 255, 0, 1500);
+      }
       Serial.println(line);
       
 }

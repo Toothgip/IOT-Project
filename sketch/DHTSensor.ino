@@ -4,6 +4,7 @@
 #define DHTPIN 14     // Digital pin correpond to D2
 #define DHTTYPE DHT22   // Sensor type DHT 22  (AM2302), AM2321
 
+
 // Initialize DHT sensor.
 DHT dht(DHTPIN, DHTTYPE);
 
@@ -20,6 +21,7 @@ HumidityTemperatureMesure getHumidityAndTemperature() {
   if (isnan(h) || isnan(t)) {
     Serial.println(F("Erreur impossible de lire le capteur d'humidité"));
     HumidityTemperatureMesure error(-99.99,-99.99,-99.99);
+    switchTemporaryBlinkRGB(0, 0,255, 1500);
     return error;
   }
   
