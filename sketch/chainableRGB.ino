@@ -42,11 +42,12 @@ void powerOnTask(void *pvParameters) {
 
 //Task for put a blink light
 void blinkRGBTask(void *pvParameters) {
-  for( ;; ) {
+  powerOnRGB(color.r, color.g,color.b);
+  for(int i= 0 ; i< 255; ) {
     powerOnRGB(color.r, color.g,color.b);
-    delay(500);
+    delay(100);
     powerOnRGB(0, 0,0);
-    delay(500);
+    delay(200);
   }
 }
 
@@ -54,10 +55,7 @@ void stopBlinkTask(void *pvParameters) {
   delay(duration);
   blink= deleteTask(blink);
   powerOn= deleteTask(powerOn);
-  color.r = 0;
-  color.g = 255;
-  color.b = 0;
-  xTaskCreate(powerOnTask, "PowerOn", STACK_SIZE, NULL, tskIDLE_PRIORITY, &powerOn);
+  switchOnRGB(0,255,0);
   vTaskDelete(NULL);
   
 }
@@ -69,13 +67,13 @@ void switchTemporaryBlinkRGB(int r, int g , int b, int d) {
   
   if(!blinking) {
     blinking = true;
-    powerOn= deleteTask(powerOn);
   }
-  else {
-    blink= deleteTask(blink);
-  }
+  powerOn= deleteTask(powerOn);
+  blink= deleteTask(blink);
+  
   duration = d;
   xTaskCreate(blinkRGBTask, "Temporary Blink", STACK_SIZE, NULL, tskIDLE_PRIORITY, &blink);
+  
   xTaskCreate(stopBlinkTask, "Stop blink", STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL);
 }
 
@@ -83,12 +81,11 @@ void switchTemporaryBlinkRGB(int r, int g , int b, int d) {
 void switchOnRGB(int r,int g,int b) {
 
   if(blinking) {
-    blink= deleteTask(blink);
     blinking = false;
   }
-  else {
-    powerOn= deleteTask(powerOn);
-  }
+  blink= deleteTask(blink);
+  powerOn= deleteTask(powerOn);
+  
   color.r = r;
   color.g = g;
   color.b = b;

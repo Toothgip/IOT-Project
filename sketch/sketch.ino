@@ -51,14 +51,18 @@ void sendData(HumidityTemperatureMesure htm, LightMesure lm) {
   jsonBuffer["humidityTemperatureMesure"] = htm.toJson();
   jsonBuffer["food"] = food;
   post("aqueous-oasis-80188.herokuapp.com", "/api/data", jsonBuffer);
-  //Quand l'API est sur un réseau local
+  
+  //l'API est sur un réseau local
   //post("192.168.1.7", "/api/data", jsonBuffer);
 }
 
 
 void buttonClicked() {
   buttonState = digitalRead(BUTTON_PIN);
-  switchTemporaryBlinkRGB(255, 255, 0, 1500);
+  if(!blinking) {
+    switchTemporaryBlinkRGB(255, 255, 0, 1500);
+  }
+  
   Serial.println("Button pressed");
   food++;
   
