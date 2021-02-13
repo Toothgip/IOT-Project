@@ -15,15 +15,15 @@ struct taskParms {
 
 struct taskParms color;
 int duration = 0;
-  //Rouge Fixe => En cours de démarrage 
-  //Vert fixe tout est OK      
-  //Blanc clignotte -> Lumiere probleme       
-                  
-  //Vert clignotte erreur => Erreur HTTP      
-  //Bleu clignotte => Erreur humidité         
-  //Rouge clignotte => Probleme de wifi       
-  //Jaune clignottant => Envoi de food        
-     
+/*
+Rouge Fixe         => En cours d'initialisation
+Vert fixe         => Fonction normal     
+Clignote en Blanc     => Problème sur le capteur de lumière      
+Clignote en vert     => La réponse de la requête HTTP n’est pas un code 201     
+Clignote Bleu         => Problème sur le capteur d’humidité         
+Clignote Rouge     => Probleme de connexion au réseau wifi       
+Clignote Jaune     => Incrémentation du compteur de nourriture             
+ */     
   
 //Power on the RGB with a color
 void powerOnRGB(int r,int  g,int b){
